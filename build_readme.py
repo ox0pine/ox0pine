@@ -39,8 +39,8 @@ PROFILE_REPO = "ox0pine"
 
 MAX_POSTS = 6
 MAX_TWEETS = 5
-TITLE_MAX_LEN = 36
-TEXT_MAX_LEN = 46
+TITLE_MAX_LEN = 28
+TEXT_MAX_LEN = 34
 
 TOKEN = os.environ.get("GH_TOKEN") or os.environ.get("GITHUB_TOKEN") or ""
 ATOM = {"a": "http://www.w3.org/2005/Atom"}
@@ -83,22 +83,12 @@ def collapse(text: str | None) -> str:
     return re.sub(r"\s+", " ", cleaned).strip()
 
 
-def truncate_middle(text: str, max_len: int) -> str:
+def truncate(text: str, max_len: int) -> str:
+    """Keep one ellipsis instead of letting a long line wrap."""
     text = collapse(text)
     if len(text) <= max_len:
         return text
-    keep = max_len - 3
-    if keep <= 1:
-        return text[:max_len]
-    return f"{text[: (keep + 1) // 2]}...{text[-(keep // 2):]}"
-
-
-def truncate_end(text: str, max_len: int) -> str:
-    text = collapse(text)
-    if len(text) <= max_len:
-        return text
-    trimmed = text[: max_len - 3].rstrip(" ，、,；;·-")
-    return f"{trimmed}..."
+    return text[: max_len - 1].rstrip(" ，、,；;·-") + "…"
 
 
 def link_text(text: str) -> str:
@@ -163,7 +153,7 @@ def fetch_posts() -> list[dict[str, str]]:
 def posts_chunk(posts: list[dict[str, str]]) -> str:
     # Dates stay out of the rendered list; the feed order already carries recency.
     lines = [
-        "• [{}]({})".format(truncate_middle(post["title"], TITLE_MAX_LEN), post["url"])
+        "• [{}]({})".format(truncate(post["title"], TITLE_MAX_LEN), post["url"])
         for post in posts
     ]
     return "<br>".join(lines)
@@ -193,7 +183,7 @@ def fetch_tweets() -> list[dict[str, str]]:
 
 def tweets_chunk(tweets: list[dict[str, str]]) -> str:
     lines = [
-        "• [{}]({})".format(link_text(truncate_end(tweet["text"], TEXT_MAX_LEN)), tweet["url"])
+        "• [{}]({})".format(link_text(truncate(tweet["text"], TEXT_MAX_LEN)), tweet["url"])
         for tweet in tweets
     ]
     return "<br>".join(lines)
