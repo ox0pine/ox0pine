@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 """Regenerate the auto-updating sections of the profile README.
 
-Content sources:
-  - Posts:   https://blog.qfpqhyl.top/atom.xml (Hexo feed)
-  - Projects: GitHub REST API, public data only
+Content sources (all public, no credentials required beyond a rate-limit token):
+  - Posts:  https://blog.qfpqhyl.top/atom.xml (Hexo feed)
+  - Tweets: the daily snapshot committed by ox0pine.github.io
+            (tools/fetch-twitter.js + .github/workflows/twitter.yml)
+  - Stats:  GitHub REST API
 
 Only the regions between matching `<!-- name starts --> ... <!-- name ends -->`
 markers are rewritten. Any source that fails to load keeps its previous content,
@@ -29,27 +31,20 @@ README = ROOT / "README.md"
 
 BLOG_FEED = "https://blog.qfpqhyl.top/atom.xml"
 BLOG_BASE = urlsplit("https://blog.qfpqhyl.top")
+TWITTER_SNAPSHOT = (
+    "https://raw.githubusercontent.com/ox0pine/ox0pine.github.io/main/source/_data/twitter.json"
+)
 GITHUB_USER = "ox0pine"
 PROFILE_REPO = "ox0pine"
 
 MAX_POSTS = 6
-MAX_PROJECTS = 6
+MAX_TWEETS = 5
 TITLE_MAX_LEN = 36
-DESC_MAX_LEN = 40
+TEXT_MAX_LEN = 46
 
 TOKEN = os.environ.get("GH_TOKEN") or os.environ.get("GITHUB_TOKEN") or ""
 ATOM = {"a": "http://www.w3.org/2005/Atom"}
 TIMEOUT = 30
-
-EMOJI_RE = re.compile(
-    "["
-    "\U0001F000-\U0001FAFF"  # pictographs, symbols, transport, supplemental
-    "\u2600-\u27bf"          # misc symbols + dingbats
-    "\u2b00-\u2bff"          # arrows / stars
-    "\ufe0f\u200d"           # variation selector-16, zero width joiner
-    "]+",
-    flags=re.UNICODE,
-)
 
 
 def http_get(url: str) -> bytes:
@@ -80,7 +75,9 @@ def replace_chunk(content: str, marker: str, chunk: str) -> str:
 
 
 def collapse(text: str | None) -> str:
-    return re.sub(r"\s+", " ", (text or "")).strip()
+    # U+FFFC is X's media placeholder; the rest are zero-width/formatting noise.
+    cleaned = re.sub("[\ufffc\u200b\u200e\u200f\ufeff\u2060]", "", text or "")
+    return re.sub(r"\s+", " ", cleaned).strip()
 
 
 def truncate_middle(text: str, max_len: int) -> str:
@@ -101,15 +98,21 @@ def truncate_end(text: str, max_len: int) -> str:
     return f"{trimmed}..."
 
 
-def strip_emoji(text: str) -> str:
-    return collapse(EMOJI_RE.sub(" ", text))
+def link_text(text: str) -> str:
+    """Escape what would break a markdown link inside a table cell."""
+    return (
+        text.replace("\\", "\\\\")
+        .replace("[", "\\[")
+        .replace("]", "\\]")
+        .replace("|", "丨")
+        .replace("<", "&lt;")
+        .replace(">", "&gt;")
+    )
 
 
-def project_desc(raw: str) -> str:
-    """Bilingual repo descriptions carry a mirrored translation after '|'."""
-    text = strip_emoji(raw)
-    head = text.split("|")[0].strip()
-    return truncate_end(head or text, DESC_MAX_LEN)
+# --------------------------------------------------------------------------- #
+# blog
+# --------------------------------------------------------------------------- #
 
 
 def canonical_blog_url(raw: str) -> str:
@@ -154,6 +157,51 @@ def fetch_posts() -> list[dict[str, str]]:
     return posts
 
 
+def posts_chunk(posts: list[dict[str, str]]) -> str:
+    lines = [
+        "• [{}]({}) - {}".format(truncate_middle(post["title"], TITLE_MAX_LEN), post["url"], post["date"])
+        for post in posts
+    ]
+    return "<br>".join(lines)
+
+
+# --------------------------------------------------------------------------- #
+# tweets
+# --------------------------------------------------------------------------- #
+
+
+def fetch_tweets() -> list[dict[str, str]]:
+    payload = fetch_json(TWITTER_SNAPSHOT)
+    tweets = []
+    for tweet in payload.get("tweets") or []:
+        url = collapse(tweet.get("url"))
+        created = collapse(tweet.get("createdAt"))
+        if not (url and created):
+            continue
+        text = collapse(tweet.get("text"))
+        if not text:
+            count = len(tweet.get("media") or [])
+            text = f"（{count} 张图）" if count > 1 else "（图片）"
+        tweets.append({"url": url, "text": text, "date": created[:10]})
+    tweets.sort(key=lambda tweet: tweet["date"], reverse=True)
+    return tweets[:MAX_TWEETS]
+
+
+def tweets_chunk(tweets: list[dict[str, str]]) -> str:
+    lines = [
+        "• [{}]({}) - {}".format(
+            link_text(truncate_end(tweet["text"], TEXT_MAX_LEN)), tweet["url"], tweet["date"]
+        )
+        for tweet in tweets
+    ]
+    return "<br>".join(lines)
+
+
+# --------------------------------------------------------------------------- #
+# github
+# --------------------------------------------------------------------------- #
+
+
 def fetch_repos() -> list[dict]:
     url = f"https://api.github.com/users/{GITHUB_USER}/repos?per_page=100&sort=pushed"
     repos = fetch_json(url)
@@ -164,29 +212,6 @@ def fetch_repos() -> list[dict]:
         for repo in repos
         if not repo.get("fork") and repo.get("name") != PROFILE_REPO
     ]
-
-
-def posts_chunk(posts: list[dict[str, str]]) -> str:
-    lines = [
-        "• [{}]({}) - {}".format(truncate_middle(post["title"], TITLE_MAX_LEN), post["url"], post["date"])
-        for post in posts
-    ]
-    return "<br>".join(lines)
-
-
-def projects_chunk(repos: list[dict]) -> str:
-    ranked = sorted(
-        repos,
-        key=lambda repo: (repo.get("stargazers_count", 0), repo.get("pushed_at", "")),
-        reverse=True,
-    )
-    lines = []
-    for repo in ranked[:MAX_PROJECTS]:
-        name = repo["name"]
-        desc = project_desc(repo.get("description") or "")
-        line = f"• [{name}]({repo['html_url']}) ★{repo.get('stargazers_count', 0)}"
-        lines.append(f"{line} - {desc}" if desc else line)
-    return "<br>".join(lines)
 
 
 def stats_chunk(repos: list[dict], user: dict) -> str:
@@ -213,9 +238,19 @@ def main() -> int:
         failures += 1
 
     try:
+        tweets = fetch_tweets()
+        if tweets:
+            content = replace_chunk(content, "tweets", tweets_chunk(tweets))
+        else:
+            print("warning: tweet snapshot empty, keeping existing content", flush=True)
+            failures += 1
+    except (urllib.error.URLError, ValueError) as error:
+        print(f"warning: tweet snapshot failed: {error}", flush=True)
+        failures += 1
+
+    try:
         repos = fetch_repos()
         if repos:
-            content = replace_chunk(content, "projects", projects_chunk(repos))
             user = fetch_json(f"https://api.github.com/users/{GITHUB_USER}")
             content = replace_chunk(content, "github_stats", stats_chunk(repos, user))
         else:
@@ -225,7 +260,7 @@ def main() -> int:
         print(f"warning: github api failed: {error}", flush=True)
         failures += 1
 
-    if failures == 2:
+    if failures == 3:
         print("error: no source refreshed, README left untouched", flush=True)
         return 1
 

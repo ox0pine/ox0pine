@@ -14,9 +14,9 @@ Hey, I'm **ox0pine**. 在博客里记录技术、折腾与生活，顺手写点�
 </td>
 <td width="600px" valign="top">
 
-**精选项目**
+**最近推文**
 
-<!-- projects starts -->• [Yanshan-University-learning-materials-sharing](https://github.com/ox0pine/Yanshan-University-learning-materials-sharing) ★22 - 大学，学了吗？如学。<br>• [CUMCM2023B](https://github.com/ox0pine/CUMCM2023B) ★18 - 2023年全国大学生数学建模比赛B题（河北省一等奖）<br>• [ISCC_Tools](https://github.com/ox0pine/ISCC_Tools) ★11 - 一些关于ISCC平台的实用脚本<br>• [server-scripts](https://github.com/ox0pine/server-scripts) ★8 - 一站式 Linux 服务器配置与环境部署脚本，面向国内开发者与科研人员。...<br>• [CodeRunner](https://github.com/ox0pine/CodeRunner) ★7 - CodeRunner 是一个安全的云端 Python 代码执行平台，允许用...<br>• [qfpqhyl.top](https://github.com/ox0pine/qfpqhyl.top) ★6 - 一个使用 React、Vite 和 Base UI 搭建的个人主页，展示最...<!-- projects ends -->
+<!-- tweets starts -->• [被印度人pr攻击了 发现他主页fork了5k个仓库😅😅😂](https://x.com/ox0pine/status/2114363214008062342) - 2026-10-25<br>• [除了跑一些小模型还能干什么](https://x.com/ox0pine/status/2113662318735479274) - 2026-10-23<br>• [感觉网心云快倒闭了，最近一年也不更新了，已经把去年买的oect盒子刷成了armbian](https://x.com/ox0pine/status/2113502290837705065) - 2026-10-23<br>• [（图片）](https://x.com/ox0pine/status/2109874128081834029) - 2026-10-13<br>• [神了 审稿意见补指标的来了](https://x.com/ox0pine/status/2106695215876866271) - 2026-10-04<!-- tweets ends -->
 </td>
 </tr>
 </table>
