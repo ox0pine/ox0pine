@@ -61,12 +61,15 @@ def fetch_json(url: str):
     return json.loads(http_get(url).decode("utf-8"))
 
 
-def replace_chunk(content: str, marker: str, chunk: str) -> str:
+def replace_chunk(content: str, marker: str, chunk: str, inline: bool = False) -> str:
     pattern = re.compile(
         r"<!-- {} starts -->.*?<!-- {} ends -->".format(marker, marker),
         re.DOTALL,
     )
-    block = f"<!-- {marker} starts -->{chunk}<!-- {marker} ends -->"
+    # A marker sharing its line with markdown makes GFM emit that line as an HTML
+    # block, so `[text](url)` stays literal. Block chunks therefore get their own lines.
+    body = chunk if inline else f"\n{chunk}\n"
+    block = f"<!-- {marker} starts -->{body}<!-- {marker} ends -->"
     replaced, count = pattern.subn(lambda _: block, content)
     if not count:
         print(f"warning: marker '{marker}' not found in README.md", flush=True)
@@ -252,7 +255,7 @@ def main() -> int:
         repos = fetch_repos()
         if repos:
             user = fetch_json(f"https://api.github.com/users/{GITHUB_USER}")
-            content = replace_chunk(content, "github_stats", stats_chunk(repos, user))
+            content = replace_chunk(content, "github_stats", stats_chunk(repos, user), inline=True)
         else:
             print("warning: no repositories returned", flush=True)
             failures += 1
