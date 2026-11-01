@@ -37,10 +37,8 @@ TWITTER_SNAPSHOT = (
 GITHUB_USER = "ox0pine"
 PROFILE_REPO = "ox0pine"
 
-MAX_POSTS = 6
-MAX_TWEETS = 5
-TITLE_MAX_LEN = 28
-TEXT_MAX_LEN = 20
+MAX_ITEMS = 6
+ITEM_MAX_LEN = 22
 
 TOKEN = os.environ.get("GH_TOKEN") or os.environ.get("GITHUB_TOKEN") or ""
 ATOM = {"a": "http://www.w3.org/2005/Atom"}
@@ -145,7 +143,7 @@ def fetch_posts() -> list[dict[str, str]]:
             continue
         seen.add(url)
         posts.append({"title": title, "url": url, "date": date})
-        if len(posts) >= MAX_POSTS:
+        if len(posts) >= MAX_ITEMS:
             break
     return posts
 
@@ -153,7 +151,7 @@ def fetch_posts() -> list[dict[str, str]]:
 def posts_chunk(posts: list[dict[str, str]]) -> str:
     # Dates stay out of the rendered list; the feed order already carries recency.
     lines = [
-        "• [{}]({})".format(truncate(post["title"], TITLE_MAX_LEN), post["url"])
+        "• [{}]({})".format(truncate(post["title"], ITEM_MAX_LEN), post["url"])
         for post in posts
     ]
     return "<br>".join(lines)
@@ -178,12 +176,12 @@ def fetch_tweets() -> list[dict[str, str]]:
             text = f"（{count} 张图）" if count > 1 else "（图片）"
         tweets.append({"url": url, "text": text, "date": created[:10]})
     tweets.sort(key=lambda tweet: tweet["date"], reverse=True)
-    return tweets[:MAX_TWEETS]
+    return tweets[:MAX_ITEMS]
 
 
 def tweets_chunk(tweets: list[dict[str, str]]) -> str:
     lines = [
-        "• [{}]({})".format(link_text(truncate(tweet["text"], TEXT_MAX_LEN)), tweet["url"])
+        "• [{}]({})".format(link_text(truncate(tweet["text"], ITEM_MAX_LEN)), tweet["url"])
         for tweet in tweets
     ]
     return "<br>".join(lines)
