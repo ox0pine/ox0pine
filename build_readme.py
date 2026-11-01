@@ -20,6 +20,7 @@ from __future__ import annotations
 import json
 import os
 import re
+import unicodedata
 import urllib.error
 import urllib.request
 import xml.etree.ElementTree as ET
@@ -38,7 +39,7 @@ GITHUB_USER = "ox0pine"
 PROFILE_REPO = "ox0pine"
 
 MAX_ITEMS = 6
-ITEM_MAX_LEN = 26
+ITEM_MAX_WIDTH = 52  # half-width cells; a CJK glyph counts 2
 
 TOKEN = os.environ.get("GH_TOKEN") or os.environ.get("GITHUB_TOKEN") or ""
 ATOM = {"a": "http://www.w3.org/2005/Atom"}
@@ -81,12 +82,32 @@ def collapse(text: str | None) -> str:
     return re.sub(r"\s+", " ", cleaned).strip()
 
 
-def truncate(text: str, max_len: int) -> str:
-    """Keep one ellipsis instead of letting a long line wrap."""
+def char_width(char: str) -> int:
+    return 2 if unicodedata.east_asian_width(char) in ("W", "F") else 1
+
+
+def display_width(text: str) -> int:
+    return sum(char_width(char) for char in text)
+
+
+def truncate(text: str, max_width: int = ITEM_MAX_WIDTH) -> str:
+    """Cap by rendered width, not character count, so both columns end at the same x.
+
+    Latin titles pack more glyphs into the same width; counting characters made the
+    left column visibly shorter than the right one.
+    """
     text = collapse(text)
-    if len(text) <= max_len:
+    if display_width(text) <= max_width:
         return text
-    return text[: max_len - 1].rstrip(" ，、,；;·-") + "…"
+
+    kept, width = [], 0
+    for char in text:
+        size = char_width(char)
+        if width + size > max_width - 2:
+            break
+        kept.append(char)
+        width += size
+    return "".join(kept).rstrip(" ，、,；;·-") + "…"
 
 
 def link_text(text: str) -> str:
@@ -151,7 +172,7 @@ def fetch_posts() -> list[dict[str, str]]:
 def posts_chunk(posts: list[dict[str, str]]) -> str:
     # Dates stay out of the rendered list; the feed order already carries recency.
     lines = [
-        "• [{}]({})".format(truncate(post["title"], ITEM_MAX_LEN), post["url"])
+        "• [{}]({})".format(truncate(post["title"]), post["url"])
         for post in posts
     ]
     return "<br>".join(lines)
@@ -181,7 +202,7 @@ def fetch_tweets() -> list[dict[str, str]]:
 
 def tweets_chunk(tweets: list[dict[str, str]]) -> str:
     lines = [
-        "• [{}]({})".format(link_text(truncate(tweet["text"], ITEM_MAX_LEN)), tweet["url"])
+        "• [{}]({})".format(link_text(truncate(tweet["text"])), tweet["url"])
         for tweet in tweets
     ]
     return "<br>".join(lines)
