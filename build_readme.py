@@ -161,8 +161,9 @@ def fetch_posts() -> list[dict[str, str]]:
 
 
 def posts_chunk(posts: list[dict[str, str]]) -> str:
+    # Dates stay out of the rendered list; the feed order already carries recency.
     lines = [
-        "• [{}]({}) - {}".format(truncate_middle(post["title"], TITLE_MAX_LEN), post["url"], post["date"])
+        "• [{}]({})".format(truncate_middle(post["title"], TITLE_MAX_LEN), post["url"])
         for post in posts
     ]
     return "<br>".join(lines)
@@ -192,9 +193,7 @@ def fetch_tweets() -> list[dict[str, str]]:
 
 def tweets_chunk(tweets: list[dict[str, str]]) -> str:
     lines = [
-        "• [{}]({}) - {}".format(
-            link_text(truncate_end(tweet["text"], TEXT_MAX_LEN)), tweet["url"], tweet["date"]
-        )
+        "• [{}]({})".format(link_text(truncate_end(tweet["text"], TEXT_MAX_LEN)), tweet["url"])
         for tweet in tweets
     ]
     return "<br>".join(lines)
