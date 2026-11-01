@@ -40,7 +40,7 @@ PROFILE_REPO = "ox0pine"
 MAX_POSTS = 6
 MAX_TWEETS = 5
 TITLE_MAX_LEN = 28
-TEXT_MAX_LEN = 34
+TEXT_MAX_LEN = 20
 
 TOKEN = os.environ.get("GH_TOKEN") or os.environ.get("GITHUB_TOKEN") or ""
 ATOM = {"a": "http://www.w3.org/2005/Atom"}
