@@ -38,7 +38,7 @@ GITHUB_USER = "ox0pine"
 PROFILE_REPO = "ox0pine"
 
 MAX_ITEMS = 6
-ITEM_MAX_LEN = 28
+ITEM_MAX_LEN = 26
 
 TOKEN = os.environ.get("GH_TOKEN") or os.environ.get("GITHUB_TOKEN") or ""
 ATOM = {"a": "http://www.w3.org/2005/Atom"}
