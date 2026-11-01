@@ -1,7 +1,3 @@
-[<img src="https://img.shields.io/badge/Blog-FF5722?style=for-the-badge&logo=blogger&logoColor=white" />](https://blog.qfpqhyl.top)
-[<img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white" />](mailto:ox0pine@gmail.com)
-[<img src="https://img.shields.io/badge/@ox0pine-000000?style=for-the-badge&logo=x&logoColor=white" />](https://x.com/ox0pine)
-
 Hey, I'm **ox0pine**. I write about tech, tinkering and everyday life on my blog, and build small tools I actually use. <!-- github_stats starts -->40 followers, 102 stars, 6 forks<!-- github_stats ends -->
 
 <table width="1200px" cellspacing="0" cellpadding="0">
