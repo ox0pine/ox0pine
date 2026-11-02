@@ -1,4 +1,4 @@
-Hey, I'm **ox0pine**. I write about tech, tinkering and everyday life on my blog, and build small tools I actually use. <!-- github_stats starts -->40 followers, 102 stars, 6 forks<!-- github_stats ends -->
+Hey, I'm **ox0pine**. I write about tech, tinkering and everyday life on my blog, and build small tools I actually use. <!-- github_stats starts -->40 followers, 102 stars, 7 forks<!-- github_stats ends -->
 
 <table width="1200px" cellspacing="0" cellpadding="0">
 <tr>
