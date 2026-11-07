@@ -1,4 +1,4 @@
-Hey, I'm **ox0pine**. I write about tech, tinkering and everyday life on my blog, and build small tools I actually use. <!-- github_stats starts -->40 followers, 102 stars, 7 forks<!-- github_stats ends -->
+Hey, I'm **ox0pine**. I write about tech, tinkering and everyday life on my blog, and build small tools I actually use. <!-- github_stats starts -->40 followers, 103 stars, 7 forks<!-- github_stats ends -->
 
 <table width="1200px" cellspacing="0" cellpadding="0">
 <tr>
@@ -15,7 +15,7 @@ Hey, I'm **ox0pine**. I write about tech, tinkering and everyday life on my blog
 **最近推文**
 
 <!-- tweets starts -->
-• [还记得你何时加入 X 吗？我知道！#我的X周年纪念日](https://x.com/ox0pine/status/2118235356281872490)<br>• [rex简直神了，搭配neovim和lazygit简直太好用了](https://x.com/ox0pine/status/2117263507083395507)<br>• [最近瘦了不少](https://x.com/ox0pine/status/2117107704460353848)<br>• [被印度人pr攻击了 发现他主页fork了5k个仓库😅😅😂](https://x.com/ox0pine/status/2114363214008062342)<br>• [除了跑一些小模型还能干什么](https://x.com/ox0pine/status/2113662318735479274)<br>• [感觉网心云快倒闭了，最近一年也不更新了，已经把去年…](https://x.com/ox0pine/status/2113502290837705065)
+• [omp and rex](https://x.com/ox0pine/status/2118722669827002820)<br>• [还记得你何时加入 X 吗？我知道！#我的X周年纪念日](https://x.com/ox0pine/status/2118235356281872490)<br>• [rex简直神了，搭配neovim和lazygit简直太好用了](https://x.com/ox0pine/status/2117263507083395507)<br>• [最近瘦了不少](https://x.com/ox0pine/status/2117107704460353848)<br>• [被印度人pr攻击了 发现他主页fork了5k个仓库😅😅😂](https://x.com/ox0pine/status/2114363214008062342)<br>• [除了跑一些小模型还能干什么](https://x.com/ox0pine/status/2113662318735479274)
 <!-- tweets ends -->
 </td>
 </tr>
