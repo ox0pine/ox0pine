@@ -2,7 +2,7 @@
 """Regenerate the auto-updating sections of the profile README.
 
 Content sources (all public, no credentials required beyond a rate-limit token):
-  - Posts:  https://blog.qfpqhyl.top/atom.xml (Hexo feed)
+  - Posts:  https://blog.ox0pine.cn/atom.xml (Hexo feed)
   - Tweets: the daily snapshot committed by ox0pine.github.io
             (tools/fetch-twitter.js + .github/workflows/twitter.yml)
   - Stats:  GitHub REST API
@@ -30,8 +30,8 @@ from urllib.parse import urlsplit, urlunsplit
 ROOT = Path(__file__).resolve().parent
 README = ROOT / "README.md"
 
-BLOG_FEED = "https://blog.qfpqhyl.top/atom.xml"
-BLOG_BASE = urlsplit("https://blog.qfpqhyl.top")
+BLOG_FEED = "https://blog.ox0pine.cn/atom.xml"
+BLOG_BASE = urlsplit("https://blog.ox0pine.cn")
 TWITTER_SNAPSHOT = (
     "https://raw.githubusercontent.com/ox0pine/ox0pine.github.io/main/source/_data/twitter.json"
 )

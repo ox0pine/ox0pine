@@ -7,7 +7,7 @@ Hey, I'm **ox0pine**. I write about tech, tinkering and everyday life on my blog
 **最新文章**
 
 <!-- blog starts -->
-• [我把 15 个 skill 装进了 OMP](https://blog.qfpqhyl.top/2026/11/01/omp-skills/)<br>• [我是怎么把 GitHub Actions 用成个人主页内容编辑器的](https://blog.qfpqhyl.top/2026/04/13/github-actions-content-editor/)<br>• [如何使用Cloudflare Tunnel](https://blog.qfpqhyl.top/2026/01/24/cloudflare-tunnel-guide/)<br>• [2025年「且行且歌」](https://blog.qfpqhyl.top/2025/12/31/2025-year-in-review/)<br>• [周记第三篇：考试？不要复习了哇](https://blog.qfpqhyl.top/2025/12/14/weekly-03-exams/)<br>• [周记第二篇：再见了横向，我要学习！](https://blog.qfpqhyl.top/2025/11/26/weekly-02-goodbye-project/)
+• [我把 15 个 skill 装进了 OMP](https://blog.ox0pine.cn/2026/11/01/omp-skills/)<br>• [我是怎么把 GitHub Actions 用成个人主页内容编辑器的](https://blog.ox0pine.cn/2026/04/13/github-actions-content-editor/)<br>• [如何使用Cloudflare Tunnel](https://blog.ox0pine.cn/2026/01/24/cloudflare-tunnel-guide/)<br>• [2025年「且行且歌」](https://blog.ox0pine.cn/2025/12/31/2025-year-in-review/)<br>• [周记第三篇：考试？不要复习了哇](https://blog.ox0pine.cn/2025/12/14/weekly-03-exams/)<br>• [周记第二篇：再见了横向，我要学习！](https://blog.ox0pine.cn/2025/11/26/weekly-02-goodbye-project/)
 <!-- blog ends -->
 </td>
 <td width="600px" valign="top">
