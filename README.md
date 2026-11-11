@@ -1,4 +1,4 @@
-Hey, I'm **ox0pine**. I write about tech, tinkering and everyday life on my blog, and build small tools I actually use. <!-- github_stats starts -->42 followers, 171 stars, 8 forks<!-- github_stats ends -->
+Hey, I'm **ox0pine**. I write about tech, tinkering and everyday life on my blog, and build small tools I actually use. <!-- github_stats starts -->44 followers, 172 stars, 8 forks<!-- github_stats ends -->
 
 <table width="1200px" cellspacing="0" cellpadding="0">
 <tr>
@@ -15,7 +15,7 @@ Hey, I'm **ox0pine**. I write about tech, tinkering and everyday life on my blog
 **最近推文**
 
 <!-- tweets starts -->
-• [知道的话就不会错了hhh](https://x.com/ox0pine/status/2119646418365489258)<br>• [谢谢喵😘](https://x.com/ox0pine/status/2119593331059732909)<br>• [谢谢你们的点赞🥹能不能给我点点star，这对我下学期找…](https://x.com/ox0pine/status/2119473579985424548)<br>• [使用mygo构建的代码编辑器，包含了标签页、终端、分屏…](https://x.com/ox0pine/status/2119366543125696980)<br>• [omp and rex](https://x.com/ox0pine/status/2118722669827002820)<br>• [还记得你何时加入 X 吗？我知道！#我的X周年纪念日](https://x.com/ox0pine/status/2118235356281872490)
+• [我瞳孔地震！](https://x.com/ox0pine/status/2120452337881993437)<br>• [差一点mojian就能上榜了 在开发工具的第七个😂](https://x.com/ox0pine/status/2120322362180776358)<br>• [知道的话就不会错了hhh](https://x.com/ox0pine/status/2119646418365489258)<br>• [谢谢喵😘](https://x.com/ox0pine/status/2119593331059732909)<br>• [谢谢你们的点赞🥹能不能给我点点star，这对我下学期找…](https://x.com/ox0pine/status/2119473579985424548)<br>• [使用mygo构建的代码编辑器，包含了标签页、终端、分屏…](https://x.com/ox0pine/status/2119366543125696980)
 <!-- tweets ends -->
 </td>
 </tr>
