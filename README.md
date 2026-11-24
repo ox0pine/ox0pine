@@ -15,7 +15,7 @@ Hey, I'm **ox0pine**. I write about tech, tinkering and everyday life on my blog
 **最近推文**
 
 <!-- tweets starts -->
-• [蓝V激励毁了X @elonmusk](https://x.com/ox0pine/status/2123435408608608311)<br>• [（图片）](https://x.com/ox0pine/status/2120540883993219078)<br>• [我瞳孔地震！](https://x.com/ox0pine/status/2120452337881993437)<br>• [差一点mojian就能上榜了 在开发工具的第七个😂](https://x.com/ox0pine/status/2120322362180776358)<br>• [知道的话就不会错了hhh](https://x.com/ox0pine/status/2119646418365489258)<br>• [谢谢喵😘](https://x.com/ox0pine/status/2119593331059732909)
+• [Nvidia终于有救了](https://x.com/ox0pine/status/2125037814526202226)<br>• [蓝V激励毁了X @elonmusk](https://x.com/ox0pine/status/2123435408608608311)<br>• [（图片）](https://x.com/ox0pine/status/2120540883993219078)<br>• [我瞳孔地震！](https://x.com/ox0pine/status/2120452337881993437)<br>• [差一点mojian就能上榜了 在开发工具的第七个😂](https://x.com/ox0pine/status/2120322362180776358)<br>• [知道的话就不会错了hhh](https://x.com/ox0pine/status/2119646418365489258)
 <!-- tweets ends -->
 </td>
 </tr>
